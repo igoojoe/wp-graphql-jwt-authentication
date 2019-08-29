@@ -216,7 +216,7 @@ class Auth {
 		 * If the request is not from the current_user or the current_user doesn't have the proper capabilities, don't return the secret
 		 */
 		$is_current_user = ( $user_id === get_current_user_id() ) ? true : false;
-		if ( ! $is_current_user || ! current_user_can( $capability ) ) {
+		if ( ! $is_current_user && ! current_user_can( $capability ) ) {
 			return new \WP_Error( 'graphql-jwt-improper-capabilities', __( 'The JWT Auth secret for this user cannot be returned', 'wp-graphql-jwt-authentication' ) );
 		}
 
